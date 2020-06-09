@@ -2,6 +2,7 @@ package com.example.blmshopprovider.impl;
 
 import com.example.api.entity.SmRecipeEntity;
 import com.example.api.form.Recipe;
+import com.example.api.form.RecipeUser;
 import com.example.api.service.SmRecipeService;
 import com.example.blmshopprovider.dao.mapper.SmRecipeMapper;
 import com.example.blmshopprovider.dao.mapper2.SmRecipeMapper2;
@@ -54,6 +55,16 @@ public class SmRecipeServiceImpl implements SmRecipeService {
     @Override
     public List<Recipe> findTop5ByShopId(int shopId) {
         return mapper2.getMax5Recipe(shopId);
+    }
+
+    @Override
+    public List<RecipeUser> getRecipeByShopIdUser(int shopId) {
+        return mapper2.getRecipeByShopIdUser(shopId);
+    }
+
+    @Override
+    public int addRecipe(SmRecipeEntity entity) {
+        return mapper.insert(entity);
     }
 
 }
