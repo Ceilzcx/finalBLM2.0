@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.example</groupId>
+    <artifactId>finalBLM2.0</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>blm-dubbo-api</module>
+        <module>blm-springboot-provider</module>
+        <module>blm-springboot-consumer</module>
+        <module>blm-shop-provider8001</module>
+    </modules>
+    <packaging>pom</packaging>
+
+    <properties>
+        <jdk.version>1.8</jdk.version>
+        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+        <maven-resources-plugin.version>3.1.0</maven-resources-plugin.version>
+        <mysql.version>8.0.20</mysql.version>
+        <mybatis.version>2.1.2</mybatis.version>
+        <tk-mybatis.version>4.1.5</tk-mybatis.version>
+        <zookeeper.version>3.6.1</zookeeper.version>
+        <zkclient.version>0.11</zkclient.version>
+        <com.alibaba.druid.version>1.1.22</com.alibaba.druid.version>
+        <dubbo-spring-boot-starter.version>2.7.6</dubbo-spring-boot-starter.version>
+        <tcc-transaction.version>1.2.12</tcc-transaction.version>
+        <druid-spring-boot-starter.version>1.1.22</druid-spring-boot-starter.version>
+        <curator-recipes.version>4.3.0</curator-recipes.version>
+    </properties>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.3.0.RELEASE</version>
+        <relativePath/>
+    </parent>
+
+    <dependencyManagement>
+        <dependencies>
+
+            <dependency>
+                <groupId>tk.mybatis</groupId>
+                <artifactId>mapper</artifactId>
+                <version>${tk-mybatis.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.curator</groupId>
+                <artifactId>curator-recipes</artifactId>
+                <version>${curator-recipes.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.mengyun</groupId>
+                <artifactId>tcc-transaction-spring</artifactId>
+                <version>${tcc-transaction.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.mengyun</groupId>
+                <artifactId>tcc-transaction-dubbo</artifactId>
+                <version>${tcc-transaction.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.101tec</groupId>
+                <artifactId>zkclient</artifactId>
+                <version>${zkclient.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.dubbo</groupId>
+                <artifactId>dubbo-spring-boot-starter</artifactId>
+                <version>${dubbo-spring-boot-starter.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${druid-spring-boot-starter.version}</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+</project>
