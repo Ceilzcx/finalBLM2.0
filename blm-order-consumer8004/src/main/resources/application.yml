@@ -1,5 +1,5 @@
 server:
-  port: 8006
+  port: 8004
 
 spring:
   jackson:
@@ -8,12 +8,12 @@ spring:
 
 dubbo:
   application:
-    name: user-client
+    name: order-client
   registry:
     address: zookeeper://ylnzk.cn:2181
   protocol:
     name: dubbo
-    port: 20882
+    port: 20881
   consumer:
     timeout: 30000
 

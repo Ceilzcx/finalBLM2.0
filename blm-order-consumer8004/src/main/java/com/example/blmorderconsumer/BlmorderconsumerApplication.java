@@ -1,4 +1,4 @@
-package com.example.blmuserconsumer;
+package com.example.blmorderconsumer;
 
 import org.apache.dubbo.config.spring.context.annotation.EnableDubbo;
 import org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration;
@@ -10,10 +10,10 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
         DataSourceAutoConfiguration.class,
         MybatisAutoConfiguration.class})
 @EnableDubbo
-public class BlmuserconsumerApplication {
+public class BlmorderconsumerApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(BlmuserconsumerApplication.class, args);
+        SpringApplication.run(BlmorderconsumerApplication.class, args);
     }
 
 }
