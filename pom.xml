@@ -12,6 +12,9 @@
         <module>blm-springboot-provider</module>
         <module>blm-springboot-consumer</module>
         <module>blm-shop-provider8001</module>
+        <module>blm-shop-consumer8002</module>
+        <module>blm-user-provider8005</module>
+        <module>blm-user-consumer8006</module>
     </modules>
     <packaging>pom</packaging>
 

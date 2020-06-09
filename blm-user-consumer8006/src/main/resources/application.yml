@@ -1,0 +1,19 @@
+server:
+  port: 8006
+
+spring:
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+dubbo:
+  application:
+    name: shop-client
+  registry:
+    address: zookeeper://ylnzk.cn:2181
+  protocol:
+    name: dubbo
+    port: 20882
+  consumer:
+    timeout: 30000
+

@@ -1,8 +1,10 @@
 package com.example.api.service;
 
-import com.example.api.util.AbstractJsonObject;
+import com.example.api.entity.UmUserEntity;
+
+import java.util.List;
 
 public interface UmUserService {
 
-    AbstractJsonObject select(String userAccount, String userPwd);
+    List<UmUserEntity> select(String userAccount, String userPwd);
 }
