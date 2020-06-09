@@ -17,7 +17,7 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableTransactionManagement
-@MapperScan(basePackages = "com.example.blmshopprovider.dao.mapper", sqlSessionTemplateRef = "firstSessionTemplate")
+@MapperScan(basePackages = "com.example.blmuserprovider.dao.mapper", sqlSessionTemplateRef = "firstSessionTemplate")
 public class FirstDataSourceConfig {
 
     @Bean("firstDS")
