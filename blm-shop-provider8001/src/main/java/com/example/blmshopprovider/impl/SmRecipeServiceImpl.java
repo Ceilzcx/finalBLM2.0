@@ -6,8 +6,9 @@ import com.example.api.form.RecipeUser;
 import com.example.api.service.SmRecipeService;
 import com.example.blmshopprovider.dao.mapper.SmRecipeMapper;
 import com.example.blmshopprovider.dao.mapper2.SmRecipeMapper2;
+import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.BeanUtils;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import tk.mybatis.mapper.entity.Example;
 
 import javax.annotation.Resource;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Component
 public class SmRecipeServiceImpl implements SmRecipeService {
     @Resource
     private SmRecipeMapper mapper;

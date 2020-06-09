@@ -8,6 +8,7 @@ import com.example.blmshopprovider.dao.mapper2.SmRecipeMapper2;
 import org.apache.dubbo.config.annotation.Service;
 import org.mengyun.tcctransaction.api.Compensable;
 import org.springframework.beans.BeanUtils;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.entity.Example;
 
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service(version = "2.0.0")
+@Component
 public class SmRecipeServiceImpl2 implements SmRecipeServiceTransactional {
     @Resource
     private SmRecipeMapper mapper;

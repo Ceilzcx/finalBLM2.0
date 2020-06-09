@@ -5,14 +5,16 @@ import com.example.api.form.Activity;
 import com.example.api.service.SmActivityService;
 import com.example.blmshopprovider.dao.mapper.SmActivityMapper;
 import com.example.blmshopprovider.dao.mapper2.SmActivityMapper2;
+import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.BeanUtils;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Component
 public class SmActivityServiceImpl implements SmActivityService {
     @Resource
     private SmActivityMapper mapper;
