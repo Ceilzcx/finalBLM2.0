@@ -1,6 +1,7 @@
 package com.example.blmorderprovider8003;
 
 import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure;
+import org.apache.dubbo.config.spring.context.annotation.EnableDubbo;
 import org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,6 +15,7 @@ import tk.mybatis.spring.annotation.MapperScan;
         DruidDataSourceAutoConfigure.class})
 @MapperScan("com.example.blmorderprovider8003.dao.")
 @ImportResource(locations = {"classpath:tcc-transaction.xml", "classpath:tcc-transaction-dubbo.xml"})
+@EnableDubbo
 public class Blmorderprovider8003Application {
 
     public static void main(String[] args) {
