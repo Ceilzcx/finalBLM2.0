@@ -8,7 +8,6 @@
 
     <bean id="springBeanFactory" class="org.mengyun.tcctransaction.spring.support.SpringBeanFactory"/>
 
-
     <bean id="transactionConfigurator" class="org.mengyun.tcctransaction.spring.support.SpringTransactionConfigurator"
           init-method="init"/>
 
@@ -24,7 +23,6 @@
 
     <task:annotation-driven/>
 
-
     <bean id="transactionRecovery" class="org.mengyun.tcctransaction.recover.TransactionRecovery">
         <property name="transactionConfigurator" ref="transactionConfigurator"/>
     </bean>
@@ -36,6 +34,18 @@
         <property name="transactionRecovery" ref="transactionRecovery"/>
         <property name="transactionConfigurator" ref="transactionConfigurator"/>
         <property name="scheduler" ref="recoverScheduler"/>
+    </bean>
+
+    <bean id="transactionRepository"
+          class="org.mengyun.tcctransaction.spring.repository.SpringJdbcTransactionRepository">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://ylnzk.cn:3306/blm?characterEncoding=UTF-8&amp;serverTimezone=GMT%2B8"/>
+        <property name="username" value="root"/>
+        <property name="password" value="ylnzk3306_"/>
     </bean>
 
 </beans>

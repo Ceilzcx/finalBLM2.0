@@ -36,7 +36,7 @@ public class OmOrderServiceImpl2 implements OmOrderServiceTransactional {
     @Resource
     private OmOrderInfMapper orderInfMapper1;
 
-    @Reference(version = "2.0.0")
+    @Reference(version = "2.0.0", check = false)
     private SmRecipeServiceTransactional smRecipeService;
 
     @Override

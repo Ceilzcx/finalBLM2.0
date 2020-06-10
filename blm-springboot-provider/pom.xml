@@ -81,13 +81,11 @@
         <dependency>
             <groupId>org.mengyun</groupId>
             <artifactId>tcc-transaction-spring</artifactId>
-            <version>${tcc-transaction.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.mengyun</groupId>
             <artifactId>tcc-transaction-dubbo</artifactId>
-            <version>${tcc-transaction.version}</version>
         </dependency>
 
     </dependencies>
