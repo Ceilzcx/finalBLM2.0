@@ -27,7 +27,7 @@ mybatis:
 
 dubbo:
   application:
-    name: shop-provider
+    name: user-provider
   registry:
     address: zookeeper://ylnzk.cn:2181
   protocol:

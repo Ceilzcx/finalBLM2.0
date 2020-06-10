@@ -11,15 +11,16 @@ import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 @Service
 @Component
 public class OmOrderInfServiceImpl implements OmOrderInfService {
-    @Autowired
+    @Resource
     private OmOrderInfMapper mapper;
 
-    @Autowired
+    @Resource
     private OmOrderInfMapper2 mapper2;
 
     @Override

@@ -4,10 +4,14 @@ import com.example.api.entity.UmUserEntity;
 import com.example.api.service.UmUserService;
 import com.example.blmuserprovider.dao.mapper.UmUserMapper;
 import com.example.blmuserprovider.dao.mapper2.UmUserMapper2;
+import org.apache.dubbo.config.annotation.Service;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.util.List;
 
+@Service
+@Component
 public class UmUserServiceImpl implements UmUserService {
     @Resource
     private UmUserMapper mapper;

@@ -21,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -29,15 +30,14 @@ import java.util.List;
 public class OmOrderServiceImpl2 implements OmOrderServiceTransactional {
     private Integer orderId;
 
-    @Autowired
+    @Resource
     private OmOrderMapper orderMapper;
 
-    @Autowired
+    @Resource
     private OmOrderMapper2 orderMapper2;
 
-    @Autowired
+    @Resource
     private OmOrderInfMapper orderInfMapper1;
-
 
     @Reference(version = "2.0.0")
     private SmRecipeServiceTransactional smRecipeService;

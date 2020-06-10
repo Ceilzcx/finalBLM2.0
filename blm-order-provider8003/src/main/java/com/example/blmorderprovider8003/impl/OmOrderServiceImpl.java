@@ -13,16 +13,17 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.sql.Timestamp;
 import java.util.List;
 
 @Service(version = "1.0.0")
 @Component
 public class OmOrderServiceImpl implements OmOrderService {
-    @Autowired
+    @Resource
     private OmOrderMapper mapper;
 
-    @Autowired
+    @Resource
     private OmOrderMapper2 mapper2;
 
     @Override
