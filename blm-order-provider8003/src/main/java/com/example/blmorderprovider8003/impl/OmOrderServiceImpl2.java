@@ -1,6 +1,5 @@
 package com.example.blmorderprovider8003.impl;
 
-
 import com.example.api.entity.OmOrderEntity;
 import com.example.api.entity.OmOrderInfEntity;
 import com.example.api.form.Order;
@@ -11,13 +10,11 @@ import com.example.api.service.OmOrderServiceTransactional;
 import com.example.api.service.SmRecipeServiceTransactional;
 import com.example.blmorderprovider8003.dao.mapper.OmOrderInfMapper;
 import com.example.blmorderprovider8003.dao.mapper.OmOrderMapper;
-import com.example.blmorderprovider8003.dao.mapper2.OmOrderInfMapper2;
 import com.example.blmorderprovider8003.dao.mapper2.OmOrderMapper2;
 import org.apache.dubbo.config.annotation.Reference;
 import org.apache.dubbo.config.annotation.Service;
 import org.mengyun.tcctransaction.api.Compensable;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -39,7 +36,7 @@ public class OmOrderServiceImpl2 implements OmOrderServiceTransactional {
     @Resource
     private OmOrderInfMapper orderInfMapper1;
 
-    @Reference(version = "2.0.0")
+    @Reference(version = "2.0.0", check = false)
     private SmRecipeServiceTransactional smRecipeService;
 
     @Override
