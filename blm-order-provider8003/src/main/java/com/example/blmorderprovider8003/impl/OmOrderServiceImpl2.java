@@ -1,6 +1,5 @@
 package com.example.blmorderprovider8003.impl;
 
-
 import com.example.api.entity.OmOrderEntity;
 import com.example.api.entity.OmOrderInfEntity;
 import com.example.api.form.Order;
@@ -11,13 +10,11 @@ import com.example.api.service.OmOrderServiceTransactional;
 import com.example.api.service.SmRecipeServiceTransactional;
 import com.example.blmorderprovider8003.dao.mapper.OmOrderInfMapper;
 import com.example.blmorderprovider8003.dao.mapper.OmOrderMapper;
-import com.example.blmorderprovider8003.dao.mapper2.OmOrderInfMapper2;
 import com.example.blmorderprovider8003.dao.mapper2.OmOrderMapper2;
 import org.apache.dubbo.config.annotation.Reference;
 import org.apache.dubbo.config.annotation.Service;
 import org.mengyun.tcctransaction.api.Compensable;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -60,9 +57,9 @@ public class OmOrderServiceImpl2 implements OmOrderServiceTransactional {
         BeanUtils.copyProperties(form, omOrderEntity);
         omOrderEntity.setOrderStatus("下单");
         omOrderEntity.setOrderCreatetime(new Timestamp(System.currentTimeMillis()));
-        orderId=orderMapper.insert(omOrderEntity);
+        orderId = orderMapper.insert(omOrderEntity);
         for (OmOrderInfEntity omOrderInfEntity : form.getOrderInfList()) {
-            smRecipeService.updateRecipeRemain(omOrderInfEntity.getRecipeId(),omOrderInfEntity.getOrderRecipeNumber());
+            smRecipeService.updateRecipeRemain(omOrderInfEntity.getRecipeId(), omOrderInfEntity.getOrderRecipeNumber());
         }
         for (OmOrderInfEntity omOrderInfEntity : form.getOrderInfList()) {
             omOrderInfEntity.setOrderId(orderId);
@@ -73,14 +70,14 @@ public class OmOrderServiceImpl2 implements OmOrderServiceTransactional {
 
     @Override
     @Transactional
-    public Integer confirmInsert(OrderForm form){
+    public Integer confirmInsert(OrderForm form) {
         return orderId;
     }
 
     @Override
     @Transactional
-    public Integer cancelInsert(OrderForm form){
-        if(orderId!=null){
+    public Integer cancelInsert(OrderForm form) {
+        if (orderId != null) {
             OmOrderEntity omOrderEntity = new OmOrderEntity();
             omOrderEntity.setOrderId(orderId);
             orderMapper.deleteByExample(omOrderEntity);
