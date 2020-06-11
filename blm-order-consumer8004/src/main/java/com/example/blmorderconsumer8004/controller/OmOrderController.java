@@ -78,7 +78,7 @@ public class OmOrderController {
         if(Md5Util.getToken(jsonObject,token)){
             PageJsonObject res=new PageJsonObject();
             res.setStatusObject(StatusHouse.COMMON_STATUS_OK);
-            PageInfo<ShopOrder> info = new PageInfo<>(orderService.getOrderListByShopId(shopId));
+            PageInfo<ShopOrder> info = new PageInfo<>(orderService.getOrderListByShopId(shopId,pageNum,pageSize));
             res.setInfo(info);
             return res;
         }else{
