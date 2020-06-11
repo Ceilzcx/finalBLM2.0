@@ -1,4 +1,4 @@
-package com.example.blmorderconsumer.controller;
+package com.example.blmorderconsumer8004.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.example.api.entity.OmOrderEntity;
@@ -8,8 +8,7 @@ import com.example.api.form.OrderForm;
 import com.example.api.form.ShopOrder;
 import com.example.api.service.OmOrderInfService;
 import com.example.api.service.OmOrderService;
-import com.example.api.service.SmActivityService;
-import com.example.api.service.UmUserService;
+import com.example.api.service.OmOrderServiceTransactional;
 import com.example.api.util.*;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -23,13 +22,13 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @CrossOrigin
 @RequestMapping("/order")
-@Api(value = "订单接口")
+@Api("订单接口")
 @Slf4j
 public class OmOrderController {
     @Reference
@@ -38,13 +37,15 @@ public class OmOrderController {
     @Reference
     private OmOrderInfService orderInfService;
 
+    @Reference
+    private OmOrderServiceTransactional omOrderServiceTransactional;
+
     @GetMapping("/getOrderListByUserId")
     @ApiOperation("获得订单信息：店铺名称、订单id、订单创建时间、订单完成时间、订单状态、备注")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "userId", value = "用户id")
     })
-    public AbstractJsonObject getOrderList(@RequestParam(value = "userId") int userId, @RequestParam int pageNum,
-                                           @RequestParam int pageSize, @RequestParam String token) {
+    public AbstractJsonObject getOrderList(@RequestParam(value = "userId") int userId, @RequestParam int pageNum, @RequestParam int pageSize, @RequestParam String token) {
         PageHelper.startPage(pageNum, pageSize);
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("userId", userId);
@@ -87,8 +88,14 @@ public class OmOrderController {
         }
     }
 
+    @GetMapping("/done")
     public List<OmOrderEntity> getOrderListDone(){
-        return null;
+        List<Order> orders = orderService.getOrderList(1);
+        OmOrderEntity entity = new OmOrderEntity();
+        BeanUtils.copyProperties(orders, entity);
+        List<OmOrderEntity> entities = new ArrayList<>();
+        entities.add(entity);
+        return entities;
     }
 
     public List<OmOrderEntity> getOrderListUndo(){
@@ -102,15 +109,9 @@ public class OmOrderController {
         try {
             SingleObject res = new SingleObject();
             res.setStatusObject(StatusHouse.COMMON_STATUS_OK);
-            int orderId = orderService.insert(form);
+            int orderId = omOrderServiceTransactional.insert(form);
+//            int orderId = orderService.insert(form);
             res.setData(orderId);
-            for (OmOrderInfEntity omOrderInfEntity : form.getOrderInfList()) {
-                omOrderInfEntity.setOrderId(orderId);
-                log.info(omOrderInfEntity.getOrderId() + "");
-                orderInfService.insert(omOrderInfEntity);
-            }
-            res.setData(orderId);
-//            WebSocketServer.sendMessageToShop(form.getShopId(), JSONObject.toJSONString(form));
             return res;
         } catch (Exception e) {
             e.printStackTrace();
@@ -120,4 +121,5 @@ public class OmOrderController {
             return res;
         }
     }
+
 }

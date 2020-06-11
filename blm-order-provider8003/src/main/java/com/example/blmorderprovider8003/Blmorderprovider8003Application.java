@@ -14,7 +14,8 @@ import tk.mybatis.spring.annotation.MapperScan;
         MybatisAutoConfiguration.class,
         DruidDataSourceAutoConfigure.class})
 @MapperScan("com.example.blmorderprovider8003.dao.")
-@ImportResource(locations = {"classpath:tcc-transaction.xml", "classpath:tcc-transaction-dubbo.xml"})
+//@ImportResource({"classpath:tcc-transaction.xml","classpath:tcc-transaction-dubbo.xml"})
+@ImportResource({"classpath:tcc-transaction.xml"})
 @EnableDubbo
 public class Blmorderprovider8003Application {
 

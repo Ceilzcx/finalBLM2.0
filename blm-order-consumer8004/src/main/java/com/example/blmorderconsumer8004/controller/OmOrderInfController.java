@@ -1,11 +1,13 @@
-package com.example.blmorderconsumer.controller;
+package com.example.blmorderconsumer8004.controller;
+
 
 import com.example.api.entity.OmOrderInfEntity;
 import com.example.api.form.OrderInfAllApp;
 import com.example.api.form.OrderInfApp;
 import com.example.api.service.OmOrderInfService;
 import com.example.api.service.OmOrderService;
-import com.example.api.service.SmActivityService;
+import com.example.api.service.OmOrderServiceTransactional;
+import com.example.api.service.SmRecipeServiceTransactional;
 import com.example.api.util.AbstractJsonObject;
 import com.example.api.util.ListJsonObject;
 import com.example.api.util.SingleObject;
@@ -22,7 +24,7 @@ import java.util.List;
 @RestController
 @CrossOrigin
 @RequestMapping("/orderinf")
-@Api(value = "订单详情接口")
+@Api("订单详情接口")
 public class OmOrderInfController {
     @Reference
     private OmOrderInfService orderInfService;

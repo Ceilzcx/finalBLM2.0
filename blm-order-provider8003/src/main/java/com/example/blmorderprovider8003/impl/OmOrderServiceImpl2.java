@@ -16,16 +16,19 @@ import org.apache.dubbo.config.annotation.Service;
 import org.mengyun.tcctransaction.api.Compensable;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
-@Service(version = "2.0.0")
+@Service
 @Component
 public class OmOrderServiceImpl2 implements OmOrderServiceTransactional {
     private Integer orderId;
+    private List<Integer> orderInfIdList;
 
     @Resource
     private OmOrderMapper orderMapper;
@@ -36,7 +39,7 @@ public class OmOrderServiceImpl2 implements OmOrderServiceTransactional {
     @Resource
     private OmOrderInfMapper orderInfMapper1;
 
-    @Reference(version = "2.0.0", check = false)
+    @Reference(check = false)
     private SmRecipeServiceTransactional smRecipeService;
 
     @Override
@@ -51,20 +54,26 @@ public class OmOrderServiceImpl2 implements OmOrderServiceTransactional {
 
     @Override
     @Compensable(confirmMethod = "confirmInsert", cancelMethod = "cancelInsert", asyncConfirm = true)
-    @Transactional
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = { RuntimeException.class })
     public Integer insert(OrderForm form) {
+        orderInfIdList=new ArrayList<>();
         OmOrderEntity omOrderEntity = new OmOrderEntity();
         BeanUtils.copyProperties(form, omOrderEntity);
         omOrderEntity.setOrderStatus("下单");
         omOrderEntity.setOrderCreatetime(new Timestamp(System.currentTimeMillis()));
-        orderId = orderMapper.insert(omOrderEntity);
+        orderMapper.insert(omOrderEntity);
+        orderId=omOrderEntity.getOrderId();
         for (OmOrderInfEntity omOrderInfEntity : form.getOrderInfList()) {
             smRecipeService.updateRecipeRemain(omOrderInfEntity.getRecipeId(), omOrderInfEntity.getOrderRecipeNumber());
         }
+
         for (OmOrderInfEntity omOrderInfEntity : form.getOrderInfList()) {
             omOrderInfEntity.setOrderId(orderId);
             orderInfMapper1.insert(omOrderInfEntity);
+            orderInfIdList.add(omOrderInfEntity.getOrderInfId());
         }
+
+
         return orderId;
     }
 
@@ -77,14 +86,15 @@ public class OmOrderServiceImpl2 implements OmOrderServiceTransactional {
     @Override
     @Transactional
     public Integer cancelInsert(OrderForm form) {
+        System.out.println("orderId: "+orderId);
         if (orderId != null) {
-            OmOrderEntity omOrderEntity = new OmOrderEntity();
-            omOrderEntity.setOrderId(orderId);
-            orderMapper.deleteByExample(omOrderEntity);
-
-            OmOrderInfEntity omOrderInfEntity = new OmOrderInfEntity();
-            omOrderInfEntity.setOrderId(orderId);
-            orderInfMapper1.deleteByExample(omOrderInfEntity);
+            if(orderInfIdList.size()!=0){
+                for(Integer orderInfId:orderInfIdList) {
+                    System.out.println("orderInfId: "+orderInfId);
+                    orderInfMapper1.deleteByPrimaryKey(orderInfId);
+                }
+            }
+            orderMapper.deleteByPrimaryKey(orderId);
         }
         return 0;
     }

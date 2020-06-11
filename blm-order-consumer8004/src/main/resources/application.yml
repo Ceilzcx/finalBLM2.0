@@ -8,7 +8,7 @@ spring:
 
 dubbo:
   application:
-    name: order-client
+    name: shop-client
   registry:
     address: zookeeper://ylnzk.cn:2181
   protocol:
@@ -16,4 +16,5 @@ dubbo:
     port: 20881
   consumer:
     timeout: 30000
+
 

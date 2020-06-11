@@ -10,14 +10,13 @@ import com.example.blmorderprovider8003.dao.mapper.OmOrderMapper;
 import com.example.blmorderprovider8003.dao.mapper2.OmOrderMapper2;
 import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.sql.Timestamp;
 import java.util.List;
 
-@Service(version = "1.0.0")
+@Service
 @Component
 public class OmOrderServiceImpl implements OmOrderService {
     @Resource

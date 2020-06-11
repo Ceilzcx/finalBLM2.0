@@ -1,10 +1,10 @@
-package com.example.blmorderconsumer;
+package com.example.blmorderconsumer8004;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class BlmorderconsumerApplicationTests {
+class BlmOrderConsumer8004ApplicationTests {
 
     @Test
     void contextLoads() {

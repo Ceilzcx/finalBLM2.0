@@ -9,6 +9,7 @@ import org.apache.dubbo.config.annotation.Service;
 import org.mengyun.tcctransaction.api.Compensable;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.entity.Example;
 
@@ -16,7 +17,7 @@ import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service(version = "2.0.0")
+@Service
 @Component
 public class SmRecipeServiceImpl2 implements SmRecipeServiceTransactional {
     @Resource
@@ -61,13 +62,15 @@ public class SmRecipeServiceImpl2 implements SmRecipeServiceTransactional {
     }
 
     @Override
-    @Compensable(confirmMethod = "confirmInsert", cancelMethod = "cancelInsert", asyncConfirm = true)
-    @Transactional
+    @Compensable(confirmMethod = "confirmUpdateRecipeRemain", cancelMethod = "cancelUpdateRecipeRemain", asyncConfirm = true)
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = { RuntimeException.class })
     public void updateRecipeRemain(int recipeId, int recipeNum) {
         Recipe recipe = mapper2.findByRecipeId(recipeId).get(0);
         SmRecipeEntity example = new SmRecipeEntity();
         example.setRecipeId(recipeId);
-        SmRecipeEntity entity = mapper.select(example).get(0);
+        SmRecipeEntity entity = mapper2.select(example).get(0);
+        System.out.println(recipeNum);
+        System.out.println(recipe.getRecipeRemain());
         if (recipe.getRecipeRemain() < recipeNum) throw new RuntimeException("余量不足");
         if (entity.getFrozenRemain() != 0) throw new RuntimeException("数据被冻结");
         mapper.updateRecipeFrozenRemain(recipeId, recipeNum);
@@ -76,6 +79,7 @@ public class SmRecipeServiceImpl2 implements SmRecipeServiceTransactional {
     @Override
     @Transactional
     public void confirmUpdateRecipeRemain(int recipeId, int recipeNum) {
+        System.out.println("confirm");
         mapper.updateRecipeFrozenRemain(recipeId, 0);
         mapper.updateRecipeRemain(recipeId, recipeNum);
     }
@@ -83,6 +87,7 @@ public class SmRecipeServiceImpl2 implements SmRecipeServiceTransactional {
     @Override
     @Transactional
     public void cancelUpdateRecipeRemain(int recipeId, int recipeNum) {
+        System.out.println("cancel");
         mapper.updateRecipeFrozenRemain(recipeId, 0);
     }
 
