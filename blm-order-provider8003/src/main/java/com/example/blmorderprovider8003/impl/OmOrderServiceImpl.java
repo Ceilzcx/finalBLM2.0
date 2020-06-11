@@ -48,4 +48,5 @@ public class OmOrderServiceImpl implements OmOrderService {
     public OrderInfAllApp getOrderByOrderId(int orderId) {
         return mapper2.getOrderByOrderIdApp(orderId);
     }
+
 }

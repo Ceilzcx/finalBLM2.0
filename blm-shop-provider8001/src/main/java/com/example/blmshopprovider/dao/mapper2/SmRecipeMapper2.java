@@ -22,7 +22,7 @@ public interface SmRecipeMapper2 extends Mapper<SmRecipeEntity> {
             @Result(property = "recipeRemain", column = "recipe_remain")})
     List<Recipe> getMax5Recipe(int shopId);
 
-    @Select({"select s.recipe_id,s.recipe_name,s.recipe_price,s.monthly_sale,s.recipe_introduction,s.recipe_remain,s.recipe_discount,s.recipe_status,s.recipe_image from sm_recipe s where s.shop_id=#{shop_id}"})
+    @Select({"select s.recipe_id,s.recipe_name,s.recipe_price,s.monthly_sale,s.recipe_introduction,s.recipe_remain,s.recipe_discount,s.recipe_status,s.recipe_image from sm_recipe s where s.shop_id=#{shopId}"})
     @Results({
             @Result(property = "recipeId", column = "recipe_id"),
             @Result(property = "recipeName", column = "recipe_name"),
@@ -36,7 +36,7 @@ public interface SmRecipeMapper2 extends Mapper<SmRecipeEntity> {
     })
     List<RecipeUser> getRecipeByShopIdUser(int shopId);
 
-    @Select("select s.recipe_id,s.recipe_name,s.recipe_price,s.monthly_sale,s.recipe_introduction,s.recipe_remain,s.recipe_discount,s.recipe_status,s.recipe_image from sm_recipe s where s.recipe_id=#{recipe_id}")
+    @Select("select s.recipe_id,s.recipe_name,s.recipe_price,s.monthly_sale,s.recipe_introduction,s.recipe_remain,s.recipe_discount,s.recipe_status,s.recipe_image from sm_recipe s where s.recipe_id=#{recipeId}")
     @Results({
             @Result(property = "recipeId",column = "recipe_id"),
             @Result(property = "recipePrice", column = "recipe_price"),

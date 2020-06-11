@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin
+//@CrossOrigin
 @RequestMapping("/shop")
 @Api(value = "商家接口")
 @Slf4j
@@ -41,7 +41,7 @@ public class SmShopController {
             @ApiImplicitParam(name = "shopId", value = "商家序号"),
     })
     public JsonObject<Shop> findByShopId(@RequestParam int shopId) {
-        JsonObject<Shop> res = new JsonObject<Shop>();
+        JsonObject<Shop> res = new JsonObject<>();
         res.setStatusObject(StatusHouse.COMMON_STATUS_OK);
         res.setData(service.findByShopId(shopId));
         return res;
@@ -64,7 +64,6 @@ public class SmShopController {
             res.setStatusObject(StatusHouse.COMMON_STATUS_TOKENERROR);
             return res;
         }
-
     }
 
     @GetMapping("/logout")

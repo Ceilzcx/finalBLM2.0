@@ -81,7 +81,6 @@ public class SmRecipeController {
         List<Recipe> recipes = service.findAllByShopId(shopId);
         for (Recipe recipe : recipes) {
             recipe.setRecipeImage(null);
-            recipes.add(recipe);
         }
         res.setData(recipes);
         return res;

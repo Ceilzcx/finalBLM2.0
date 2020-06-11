@@ -2,7 +2,6 @@ package com.example.blmorderconsumer8004.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.example.api.entity.OmOrderEntity;
-import com.example.api.entity.OmOrderInfEntity;
 import com.example.api.form.Order;
 import com.example.api.form.OrderForm;
 import com.example.api.form.ShopOrder;
@@ -110,8 +109,8 @@ public class OmOrderController {
             SingleObject res = new SingleObject();
             res.setStatusObject(StatusHouse.COMMON_STATUS_OK);
             int orderId = omOrderServiceTransactional.insert(form);
-//            int orderId = orderService.insert(form);
             res.setData(orderId);
+            WebSocketServer.sendMessageToShop(form.getShopId(), JSONObject.toJSONString(form));
             return res;
         } catch (Exception e) {
             e.printStackTrace();
