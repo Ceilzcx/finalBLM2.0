@@ -68,6 +68,7 @@ public class SmRecipeServiceImpl2 implements SmRecipeServiceTransactional {
         Recipe recipe = mapper2.findByRecipeId(recipeId).get(0);
         SmRecipeEntity example = new SmRecipeEntity();
         example.setRecipeId(recipeId);
+        System.out.println(example.getRecipeId());
         SmRecipeEntity entity = mapper2.select(example).get(0);
         System.out.println(recipeNum);
         System.out.println(recipe.getRecipeRemain());
