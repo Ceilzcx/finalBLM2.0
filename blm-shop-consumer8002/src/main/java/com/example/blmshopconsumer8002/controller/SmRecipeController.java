@@ -37,7 +37,7 @@ public class SmRecipeController {
             @ApiImplicitParam(name = "pageSize", value = "页面大小"),
     })
     public AbstractJsonObject getRecipeList(@RequestParam int shopId, @RequestParam int pageNum, @RequestParam int pageSize, @RequestParam String token) {
-        PageHelper.startPage(pageNum, pageSize);
+
         JSONObject jsonObject=new JSONObject();
         jsonObject.put("shopId",shopId);
         jsonObject.put("pageNum", pageNum);
@@ -45,7 +45,7 @@ public class SmRecipeController {
         if(Md5Util.getToken(jsonObject,token)){
             PageJsonObject res=new PageJsonObject();
             res.setStatusObject(StatusHouse.COMMON_STATUS_OK);
-            List<Recipe> recipes = service.findAllByShopId(shopId);
+            List<Recipe> recipes = service.findAllByShopId(shopId,pageNum,pageSize);
             PageInfo<Recipe> info = new PageInfo<>(recipes);
             res.setInfo(info);
             return res;
@@ -65,7 +65,7 @@ public class SmRecipeController {
     public AbstractJsonObject getAllRecipeList(@RequestParam int shopId) {
         ListJsonObject res = new ListJsonObject();
         res.setStatusObject(StatusHouse.COMMON_STATUS_OK);
-        List<Recipe> recipes = service.findAllByShopId(shopId);
+        List<Recipe> recipes = service.findAllByShopId(shopId,1,100);
         res.setData(recipes);
         return res;
     }
@@ -78,7 +78,7 @@ public class SmRecipeController {
     public AbstractJsonObject getAllRecipeListWithoutIMG(@RequestParam int shopId) {
         ListJsonObject res = new ListJsonObject();
         res.setStatusObject(StatusHouse.COMMON_STATUS_OK);
-        List<Recipe> recipes = service.findAllByShopId(shopId);
+        List<Recipe> recipes = service.findAllByShopId(shopId,1,100);
         for (Recipe recipe : recipes) {
             recipe.setRecipeImage(null);
         }

@@ -7,7 +7,7 @@ import com.example.api.form.RecipeUser;
 import java.util.List;
 
 public interface SmRecipeService {
-    List<Recipe> findAllByShopId(int shopId);
+    List<Recipe> findAllByShopId(int shopId,int pageNum,int pageSize);
 
     int updateRecipe(int recipeId, String recipeName,
                       Double recipePrice, String recipeIntroduction,
