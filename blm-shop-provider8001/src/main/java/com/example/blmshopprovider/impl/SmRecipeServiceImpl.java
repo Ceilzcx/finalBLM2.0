@@ -6,6 +6,7 @@ import com.example.api.form.RecipeUser;
 import com.example.api.service.SmRecipeService;
 import com.example.blmshopprovider.dao.mapper.SmRecipeMapper;
 import com.example.blmshopprovider.dao.mapper2.SmRecipeMapper2;
+import com.github.pagehelper.PageHelper;
 import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
@@ -24,7 +25,8 @@ public class SmRecipeServiceImpl implements SmRecipeService {
     private SmRecipeMapper2 mapper2;
 
     @Override
-    public List<Recipe> findAllByShopId(int shopId) {
+    public List<Recipe> findAllByShopId(int shopId,int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
         Example example = new Example(SmRecipeEntity.class);
         Example.Criteria criteria = example.createCriteria();
         criteria.andEqualTo("shopId", shopId);
