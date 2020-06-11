@@ -122,4 +122,20 @@ public class OmOrderController {
         }
     }
 
+    @GetMapping("/getOrderListByUserIdApp")
+    @ApiOperation("通过userId获取订单列表")
+    public AbstractJsonObject getOrderListByUserIdApp(@RequestParam int userId) {
+        try {
+            ListJsonObject res = new ListJsonObject();
+            res.setData(omOrderServiceTransactional.getOrderListByUserId(userId));
+            res.setStatusObject(StatusHouse.COMMON_STATUS_OK);
+            return res;
+        } catch (Exception e) {
+            e.printStackTrace();
+            AbstractJsonObject res = new AbstractJsonObject();
+            res.setStatusObject(StatusHouse.COMMON_STATUS_DBERROR);
+            return res;
+        }
+    }
+
 }

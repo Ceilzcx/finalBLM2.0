@@ -2,10 +2,7 @@ package com.example.blmorderprovider8003.impl;
 
 import com.example.api.entity.OmOrderEntity;
 import com.example.api.entity.OmOrderInfEntity;
-import com.example.api.form.Order;
-import com.example.api.form.OrderForm;
-import com.example.api.form.OrderInfAllApp;
-import com.example.api.form.ShopOrder;
+import com.example.api.form.*;
 import com.example.api.service.OmOrderServiceTransactional;
 import com.example.api.service.SmRecipeServiceTransactional;
 import com.example.blmorderprovider8003.dao.mapper.OmOrderInfMapper;
@@ -103,5 +100,10 @@ public class OmOrderServiceImpl2 implements OmOrderServiceTransactional {
     @Override
     public OrderInfAllApp getOrderByOrderId(int orderId) {
         return orderMapper2.getOrderByOrderIdApp(orderId);
+    }
+
+    @Override
+    public List<OrderApp> getOrderListByUserId(int userId) {
+        return orderMapper2.getOrderListByUserId(userId);
     }
 }
