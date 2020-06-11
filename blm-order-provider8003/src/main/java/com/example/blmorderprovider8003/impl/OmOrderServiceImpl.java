@@ -8,6 +8,7 @@ import com.example.api.form.ShopOrder;
 import com.example.api.service.OmOrderService;
 import com.example.blmorderprovider8003.dao.mapper.OmOrderMapper;
 import com.example.blmorderprovider8003.dao.mapper2.OmOrderMapper2;
+import com.github.pagehelper.PageHelper;
 import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
@@ -31,9 +32,12 @@ public class OmOrderServiceImpl implements OmOrderService {
     }
 
     @Override
-    public List<ShopOrder> getOrderListByShopId(int shopId) {
+    public List<ShopOrder> getOrderListByShopId(int shopId, int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
         return mapper2.getOrderListByShopId(shopId);
     }
+
+
 
     @Override
     public Integer insert(OrderForm form) {

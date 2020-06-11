@@ -77,7 +77,7 @@ public class OmOrderController {
         if(Md5Util.getToken(jsonObject,token)){
             PageJsonObject res=new PageJsonObject();
             res.setStatusObject(StatusHouse.COMMON_STATUS_OK);
-            PageInfo<ShopOrder> info = new PageInfo<>(orderService.getOrderListByShopId(shopId));
+            PageInfo<ShopOrder> info = new PageInfo<>(orderService.getOrderListByShopId(shopId,pageNum,pageSize));
             res.setInfo(info);
             return res;
         }else{
@@ -115,6 +115,22 @@ public class OmOrderController {
         } catch (Exception e) {
             e.printStackTrace();
             log.error(e.getMessage());
+            AbstractJsonObject res = new AbstractJsonObject();
+            res.setStatusObject(StatusHouse.COMMON_STATUS_DBERROR);
+            return res;
+        }
+    }
+
+    @GetMapping("/getOrderListByUserIdApp")
+    @ApiOperation("通过userId获取订单列表")
+    public AbstractJsonObject getOrderListByUserIdApp(@RequestParam int userId) {
+        try {
+            ListJsonObject res = new ListJsonObject();
+            res.setData(omOrderServiceTransactional.getOrderListByUserId(userId));
+            res.setStatusObject(StatusHouse.COMMON_STATUS_OK);
+            return res;
+        } catch (Exception e) {
+            e.printStackTrace();
             AbstractJsonObject res = new AbstractJsonObject();
             res.setStatusObject(StatusHouse.COMMON_STATUS_DBERROR);
             return res;

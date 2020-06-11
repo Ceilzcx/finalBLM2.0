@@ -1,9 +1,6 @@
 package com.example.api.service;
 
-import com.example.api.form.Order;
-import com.example.api.form.OrderForm;
-import com.example.api.form.OrderInfAllApp;
-import com.example.api.form.ShopOrder;
+import com.example.api.form.*;
 
 import java.util.List;
 
@@ -21,4 +18,5 @@ public interface OmOrderServiceTransactional {
 
     OrderInfAllApp getOrderByOrderId(int orderId);
 
+    List<OrderApp> getOrderListByUserId(int userId);
 }

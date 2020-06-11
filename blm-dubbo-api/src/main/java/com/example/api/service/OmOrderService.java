@@ -13,7 +13,7 @@ public interface OmOrderService {
 
     List<Order> getOrderList(int userId);
 
-    List<ShopOrder> getOrderListByShopId(int shopId);
+    List<ShopOrder> getOrderListByShopId(int shopId,int pageNum,int pageSize);
 
     Integer insert(OrderForm form);
 

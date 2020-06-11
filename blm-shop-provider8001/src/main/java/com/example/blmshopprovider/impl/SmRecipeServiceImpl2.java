@@ -30,7 +30,7 @@ public class SmRecipeServiceImpl2 implements SmRecipeServiceTransactional {
         Example example = new Example(SmRecipeEntity.class);
         Example.Criteria criteria = example.createCriteria();
         criteria.andEqualTo("shopId", shopId);
-        List<SmRecipeEntity> entities = mapper.selectByExample(example);
+        List<SmRecipeEntity> entities = mapper2.selectByExample(example);
         List<Recipe> recipes = new ArrayList<>();
         for (SmRecipeEntity entity : entities) {
             Recipe recipe = new Recipe();
